@@ -14,9 +14,52 @@ import "strconv"
 // and reply for an RPC.
 //
 
+const (
+	mapTask = iota  // c0 == 0
+	reduceTask = iota  // c1 == 1
+	waitTask = iota
+)
+
+const (
+	taskNotStarted = iota
+	taskInProgress = iota
+	taskCompleted = iota
+)
+
 type ExampleArgs struct {
 	X int
 }
+
+type TaskRequest struct {
+}
+
+type TaskReply struct {
+	Filename string
+	TaskType int 
+	Reducers int
+	MapJobID int
+	ReduceJobID int
+	BucketID int
+}
+
+type NotifyMapDoneRequest struct {
+	MapJobID int //this will map to file on coordinator side
+	IntFileNames []string
+}
+
+type NotifyMapDoneResponse struct {
+
+}
+
+type NotifyReduceDoneRequest struct {
+	ReduceJobID int
+}
+
+type NotifyReduceDoneResponse struct {
+
+}
+
+
 
 type ExampleReply struct {
 	Y int
